@@ -5,11 +5,6 @@ This file contains all the constant values used throughout the application,
 including physical dimensions, visualization parameters, and simulation settings.
 """
 
-from pathlib import Path
-
-# Project paths
-BASE_DIR = Path(__file__).parent
-
 # -----------------------------------------------------------------------------
 # Brick and wall physical dimensions (mm)
 # -----------------------------------------------------------------------------
