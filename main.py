@@ -7,6 +7,10 @@ and runs the main game loop for the simulation.
 
 import pygame
 import sys
+import os
+
+# Add project root to sys.path once
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from constants import (
     WALL_WIDTH, WALL_HEIGHT, SCALE, BOND_NAMES,
