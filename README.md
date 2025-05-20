@@ -7,8 +7,8 @@ A Python simulator for building masonry walls with different bond patterns using
 ### Features
 
 - Multiple bond patterns (Stretcher, English Cross, Wild)
-- Optimized brick placement algorithms
-- Visualization of the building process
+- Optimized brick placement algorithm
+- Visualization of the building process 
 - Stride-based optimization for robotic movement
 
 ### Controls
@@ -21,27 +21,6 @@ s: Place all bricks in the current stride <br />
 q or ESC: Quit the simulator
 
 ## Project Structure
-<!-- 
-masonry_simulator/
-├── constants.py
-├── main.py
-├── models/
-│   ├── __init__.py
-│   └── wall.py
-├── bonds/
-│   ├── __init__.py
-│   ├── stretcher.py
-│   ├── english_cross.py
-│   └── wild.py
-├── optimizer/
-│   ├── __init__.py
-│   ├── brick_placer.py
-│   ├── support_checker.py
-│   └── stride_optimizer.py
-├── ui/
-│   ├── __init__.py
-│   ├── visualization.py
-└── requirements.txt -->
 
 ```
 masonry_wall_simulator/
@@ -64,6 +43,16 @@ masonry_wall_simulator/
 │   └── visualization.py
 └── main.py
 ```
+
+### Definitions
+
+Wild Bond adheres to the following rules:
+- No two head joints directly on top of each other
+- Not more than 5 consecutive "staggered steps" or "falling teeth" patterns, where the ends of bricks form a jagged, step-like appearance
+- There may be a maximum of 3 headers next to each other
+- There may be a maximum of 5 stretchers next to each other
+
+A brick is slightly more than two times longer than it is deep. Say, you have a brick placed with its stretcher (length) facing out. To perfectly fit 2 bricks above it with their headers (width) facing out, the total length adds to 2 times the width/depth plus the head joint. Therefore, the stretcher length has to be $(2*width + HeadJoint)$.
 
 ## Setup
 
