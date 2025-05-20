@@ -43,6 +43,27 @@ masonry_simulator/
 │   ├── visualization.py
 └── requirements.txt -->
 
+masonry_wall_simulator/
+├── constants.py
+├── models/
+│   ├── init.py
+│   └── wall.py
+├── patterns/
+│   ├── init.py
+│   ├── stretcher_bond.py
+│   ├── english_cross_bond.py
+│   └── wild_bond.py
+├── core/
+│   ├── init.py
+│   ├── brick_placer.py
+│   ├── support_checker.py
+│   └── stride_optimizer.py
+└── ui/
+├── init.py
+├── visualization.py
+main.py
+setup.py
+
 ## Setup
 
 Python 3.6 or higher is required.
