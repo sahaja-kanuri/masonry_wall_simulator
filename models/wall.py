@@ -7,10 +7,10 @@ This module defines the Wall class which represents the entire masonry wall stru
 import sys
 import os
 # Add the base directory to the Python path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Add project root to sys.path
-# sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Add project root to sys.path to ensure imports work correctly
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from constants import (
     NUM_COURSES, COURSE_HEIGHT, 

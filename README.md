@@ -49,21 +49,20 @@ masonry_wall_simulator/
 ├── models/
 │   ├── __init__.py
 │   └── wall.py
-├── patterns/
+├── bonds/
 │   ├── __init__.py
-│   ├── stretcher_bond.py
-│   ├── english_cross_bond.py
-│   └── wild_bond.py
-├── core/
+│   ├── stretcher.py
+│   ├── english_cross.py
+│   └── wild.py
+├── optimizer/
 │   ├── __init__.py
 │   ├── brick_placer.py
 │   ├── support_checker.py
 │   └── stride_optimizer.py
-└── ui/
-    ├── __init__.py
-    ├── visualization.py
-main.py
-setup.py
+├── ui/
+│   ├── __init__.py
+│   └── visualization.py
+└── main.py
 ```
 
 ## Setup
