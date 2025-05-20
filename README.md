@@ -43,7 +43,6 @@ masonry_simulator/
 │   ├── visualization.py
 └── requirements.txt
 
-
 ## Setup
 
 Python 3.6 or higher is required.
