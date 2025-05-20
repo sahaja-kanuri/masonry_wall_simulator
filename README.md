@@ -45,7 +45,8 @@ masonry_wall_simulator/
 ├── ui/
 │   ├── __init__.py
 │   └── visualization.py
-└── main.py
+├── main.py
+└── run.sh
 ```
 
 ### Definitions
