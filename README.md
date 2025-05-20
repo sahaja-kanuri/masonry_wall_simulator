@@ -28,7 +28,6 @@ q or ESC: Quit the simulator
 
 ```
 masonry_wall_simulator/
-├── constants.py
 ├── models/
 │   ├── __init__.py
 │   └── wall.py
@@ -45,7 +44,9 @@ masonry_wall_simulator/
 ├── ui/
 │   ├── __init__.py
 │   └── visualization.py
+├── constants.py
 ├── main.py
+├── requirements.txt
 └── run.sh
 ```
 
