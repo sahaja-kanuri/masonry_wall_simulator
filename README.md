@@ -13,11 +13,11 @@ A Python simulator for building masonry walls with different bond patterns using
 
 ### Controls
 
-ENTER: Place a single brick
-s: Place all bricks in the current stride
-1: Switch to Stretcher Bond
-2: Switch to English Cross Bond
-3: Switch to Wild Bond
+ENTER: Place a single brick <br />
+s: Place all bricks in the current stride <br />
+1: Switch to Stretcher Bond <br />
+2: Switch to English Cross Bond <br />
+3: Switch to Wild Bond <br />
 q or ESC: Quit the simulator
 
 ## Project Structure
