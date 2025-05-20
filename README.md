@@ -2,11 +2,15 @@
 
 ## Description
 
-A Python simulator for building masonry walls with different bond patterns using a robotic system.
+A Python simulator (using pygame) for building masonry walls with different bond patterns using a robotic system made out of a crane on top of a ground vehicle.
+
+Wall dimensions and specifications of the robotic crane that places the bricks can be specified in the `constants.py` file.
+
+The brick-laying algorithm is designed to optimize the number of bricks placed by the crane, before the robot has to be moved (which is relatively slow compared to crane movement).
 
 ### Features
 
-- Multiple bond patterns (Stretcher, English Cross, Wild)
+- Multiple brick bond patterns (Stretcher, English Cross, Wild)
 - Optimized brick placement algorithm
 - Visualization of the building process 
 - Stride-based optimization for robotic movement
