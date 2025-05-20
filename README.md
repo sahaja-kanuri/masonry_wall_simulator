@@ -43,26 +43,27 @@ masonry_simulator/
 │   ├── visualization.py
 └── requirements.txt -->
 
-masonry_wall_simulator/
+masonry_simulator/
 ├── constants.py
 ├── models/
-│   ├── init.py
+│   ├── __init__.py
+│   ├── brick.py
 │   └── wall.py
 ├── patterns/
-│   ├── init.py
+│   ├── __init__.py
 │   ├── stretcher_bond.py
 │   ├── english_cross_bond.py
 │   └── wild_bond.py
 ├── core/
-│   ├── init.py
+│   ├── __init__.py
 │   ├── brick_placer.py
 │   ├── support_checker.py
 │   └── stride_optimizer.py
 └── ui/
-├── init.py
-├── visualization.py
+    ├── __init__.py
+    ├── visualization.py
+    └── event_handler.py
 main.py
-setup.py
 
 ## Setup
 
