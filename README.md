@@ -21,7 +21,7 @@ s: Place all bricks in the current stride
 q or ESC: Quit the simulator
 
 ## Project Structure
-
+<!-- 
 masonry_simulator/
 ├── constants.py
 ├── main.py
@@ -41,7 +41,7 @@ masonry_simulator/
 ├── ui/
 │   ├── __init__.py
 │   ├── visualization.py
-└── requirements.txt
+└── requirements.txt -->
 
 ## Setup
 
