@@ -62,6 +62,16 @@ A brick is slightly more than two times longer than it is deep. Say, you have a 
 
 Python 3.6 or higher is required.
 
+Bash script that installs all necessary dependencies and runs the main script:
+
+<pre><code>
+$ bash run.sh
+</code></pre>
+
+OR
+
+Run these commands in the terminal:
+
 <pre><code>
 $ python3 -m venv robotics
 $ source robotics/bin/activate
