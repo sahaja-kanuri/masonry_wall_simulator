@@ -52,7 +52,7 @@ Wild Bond adheres to the following rules:
 - There may be a maximum of 3 headers next to each other
 - There may be a maximum of 5 stretchers next to each other
 
-A brick is slightly more than two times longer than it is deep. Say, you have a brick placed with its stretcher (length) facing out. To perfectly fit 2 bricks above it with their headers (width) facing out, the total length adds to 2 times the width/depth plus the head joint. Therefore, the stretcher length has to be $(2*width + HeadJoint)$.
+A brick is slightly more than two times longer than it is deep. Say, you have a brick placed with its stretcher (length) facing out. To perfectly fit 2 bricks above it with their headers (width) facing out, the total length adds to 2 times the width/depth plus the head joint. Therefore, the stretcher length has to be (2*Width + Head Joint).
 
 ## Setup
 
