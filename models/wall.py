@@ -8,10 +8,15 @@ import sys
 import os
 # Add the base directory to the Python path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Add project root to sys.path
+# sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from constants import (
-    NUM_COURSES, COURSE_HEIGHT, STRETCHER_BOND, ENGLISH_CROSS_BOND, 
-    WILD_BOND, FULL_BRICK_LENGTH, FULL_BRICK_WIDTH, FULL_BRICK_HEIGHT, 
-    HEAD_JOINT
+    NUM_COURSES, COURSE_HEIGHT, 
+    STRETCHER_BOND, ENGLISH_CROSS_BOND, WILD_BOND,
+    FULL_BRICK_LENGTH, FULL_BRICK_WIDTH, FULL_BRICK_HEIGHT, 
+    HEAD_JOINT, STRIDE_WIDTH, STRIDE_HEIGHT
 )
 
 from bonds.stretcher import _initialize_stretcher_course
@@ -21,14 +26,15 @@ from bonds.english_cross import _get_optimal_starting_position as _englishCross_
 from bonds.wild import _initialize_wild_bond_course
 from bonds.wild import _get_optimal_starting_position as _wild__starting_position
 
-from optimizer.stride_optimizer import StrideOptimizer
-from optimizer.support_checker import SupportChecker
+# from optimizer.stride_optimizer import StrideOptimizer
+# from optimizer.support_checker import SupportChecker
 
 class Wall:
     """
     A class representing the entire masonry wall.
     The wall consists of multiple courses (rows) of bricks with a specific bond pattern.
     """
+
     def __init__(self, width, height, bond_type=STRETCHER_BOND):
         """
         Initialize a new Wall object.
@@ -55,16 +61,16 @@ class Wall:
         # Calculate physical positions of each brick for stride optimization
         self._calculate_brick_positions()
 
-        self.support_checker = SupportChecker(self)
-        self.stride_optimizer = StrideOptimizer(self, self.support_checker)
+        # self.support_checker = SupportChecker(self)
+        # self.stride_optimizer = StrideOptimizer(self, self.support_checker)
         
         # Choose optimal starting position based on bond type
         if bond_type==STRETCHER_BOND:
-            self.robot_position = _stretcher__starting_position(self.grid, self.stride_optimizer)
+            self.robot_position = _stretcher__starting_position(self)
         elif bond_type==ENGLISH_CROSS_BOND:
-            self.robot_position = _englishCross__starting_position(self.grid, self.stride_optimizer)
+            self.robot_position = _englishCross__starting_position(self)
         elif bond_type==WILD_BOND:
-            self.robot_position = _wild__starting_position(self.grid, self.stride_optimizer)
+            self.robot_position = _wild__starting_position(self)
         
         # Current stride bricks queue
         self.current_stride_bricks = []
@@ -147,5 +153,27 @@ class Wall:
     def is_complete(self):
         """Check if the wall is complete."""
         return self.placed_bricks == self.total_bricks
+    
+    def brick_in_stride(self, course, position, stride_x, stride_y):
+        """
+        Check if a brick is within the current stride bounds.
+        
+        Args:
+            course (int): The course number (0-based).
+            position (int): The position within the course.
+            stride_x (float): The x-coordinate of the stride's bottom-left corner.
+            stride_y (float): The y-coordinate of the stride's bottom-left corner.
+            
+        Returns:
+            bool: True if the brick is within the stride bounds, False otherwise.
+        """
+
+        brick = self.brick_positions[course][position]
+        
+        # Check if the brick is within the stride bounds
+        return (brick['x'] >= stride_x and 
+                brick['x'] + brick['length'] <= stride_x + STRIDE_WIDTH and
+                brick['y'] >= stride_y and 
+                brick['y'] + brick['height'] <= stride_y + STRIDE_HEIGHT)
     
     

@@ -12,12 +12,6 @@ from constants import (
     FULL_BRICK_LENGTH, HEAD_JOINT, FULL_BRICK_WIDTH, 
     STRIDE_WIDTH, WALL_WIDTH, NUM_COURSES
 )
-# from models import wall
-# from optimizer.support_checker import SupportChecker
-# from optimizer.stride_optimizer import StrideOptimizer
-# brick_in_stride
-# from optimizer.stride_optimizer.StrideOptimizer import brick_in_stride
-
 
 def _initialize_english_cross_course(course):
     """
@@ -119,8 +113,7 @@ def _initialize_english_cross_course(course):
     
     return row
 
-
-def _get_optimal_starting_position(brick_positions, StrideOptimizer):
+def _get_optimal_starting_position(wall):
     """
     Determine the optimal starting position for an English Cross bond wall.
     
@@ -129,7 +122,7 @@ def _get_optimal_starting_position(brick_positions, StrideOptimizer):
     complex header/stretcher pattern.
     
     Args:
-        brick_positions (list): List of brick position data.
+        wall (Wall): The wall object to optimize for.
         
     Returns:
         tuple: (x, y) coordinates for the optimal starting position.
@@ -165,11 +158,11 @@ def _get_optimal_starting_position(brick_positions, StrideOptimizer):
             course_bricks = 0
             course_weight = 1.0 / (course + 1)  # Weight earlier courses more heavily
             
-            for position in range(len(brick_positions[course])):
+            for position in range(len(wall.grid[course])):
                 # stride_optimizer = StrideOptimizer()
-                if StrideOptimizer.brick_in_stride(course, position, stride_x, stride_y):
+                if wall.brick_in_stride(course, position, stride_x, stride_y):
                     # Give more weight to header bricks in English Cross Bond
-                    if brick_positions[course][position][2] == 'header':
+                    if wall.grid[course][position][2] == 'header':
                         course_bricks += 1.2  # Headers get extra weight
                     else:
                         course_bricks += 1.0

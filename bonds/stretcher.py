@@ -12,7 +12,6 @@ from constants import (
     FULL_BRICK_LENGTH, HALF_BRICK_LENGTH, HEAD_JOINT, 
     STRIDE_WIDTH, WALL_WIDTH
 )
-from optimizer.stride_optimizer import StrideOptimizer
 
 def _initialize_stretcher_course(course):
     """
@@ -58,7 +57,7 @@ def _initialize_stretcher_course(course):
     
     return row
 
-def _get_optimal_starting_position(brick_positions, StrideOptimizer):
+def _get_optimal_starting_position(wall):
     """
     Determine the optimal starting position for a stretcher bond wall.
     
@@ -66,7 +65,7 @@ def _get_optimal_starting_position(brick_positions, StrideOptimizer):
     that allows for the most bricks to be laid in the first stride.
     
     Args:
-        brick_positions (list): List of brick position data.
+        wall (Wall): The wall object to optimize for.
         
     Returns:
         tuple: (x, y) coordinates for the optimal starting position.
@@ -98,8 +97,8 @@ def _get_optimal_starting_position(brick_positions, StrideOptimizer):
         
         # Count how many first-course bricks would be in this stride
         bricks_in_stride = 0
-        for position in range(len(brick_positions[0])):
-            if StrideOptimizer.brick_in_stride(0, position, stride_x, stride_y):
+        for position in range(len(wall.grid[0])):
+            if wall.brick_in_stride(0, position, stride_x, stride_y):
                 bricks_in_stride += 1
         
         # If this position allows more bricks in the first stride, use it

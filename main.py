@@ -9,19 +9,15 @@ import pygame
 import sys
 
 from constants import (
-    WALL_WIDTH, WALL_HEIGHT, SCALE, 
+    WALL_WIDTH, WALL_HEIGHT, SCALE, BOND_NAMES,
     STRETCHER_BOND, ENGLISH_CROSS_BOND, WILD_BOND,
-    STATS_SPACE, FPS, BOND_NAMES
+    STATS_SPACE, FPS
 )
 from models.wall import Wall
-from bonds.stretcher import _initialize_stretcher_course
-from bonds.english_cross import _initialize_english_cross_course
-from bonds.wild import _initialize_wild_bond_course
 from optimizer.support_checker import SupportChecker
 from optimizer.stride_optimizer import StrideOptimizer
 from optimizer.brick_placer import BrickPlacer
 from ui.visualization import WallVisualizer
-# from .ui.event_handler import EventHandler
 
 def main():
     """
@@ -37,7 +33,7 @@ def main():
     
     # Calculate window size with space below for text
     window_width = wall_width_px + 20  # Just enough for the wall plus a small margin
-    window_height = wall_height_px + 180  # Extra space below for stats (increased for more text)
+    window_height = wall_height_px + STATS_SPACE  # Extra space below for stats (increased for more text)
     
     # Create the window
     screen = pygame.display.set_mode((window_width, window_height))
@@ -49,9 +45,8 @@ def main():
     # Start with stretcher bond
     bond_type = STRETCHER_BOND
     
-    # Create the wall
+    # Create the wall and its dependent objects
     wall = Wall(WALL_WIDTH, WALL_HEIGHT, bond_type)
-
     support_checker = SupportChecker(wall)
     stride_optimizer = StrideOptimizer(wall, support_checker)
     brick_placer = BrickPlacer(wall, support_checker, stride_optimizer)
@@ -64,8 +59,14 @@ def main():
     def reset_wall(new_bond_type):
         # nonlocal wall, bond_type 
         nonlocal wall, bond_type, support_checker, stride_optimizer, brick_placer, visualizer  
+        
+        # Update bond type
         bond_type = new_bond_type
+        
+        # Create a fresh wall instance with the new bond type
         wall = Wall(WALL_WIDTH, WALL_HEIGHT, bond_type)
+
+        # Create new support checker, stride optimizer, brick placer, visualizer with the new wall
         support_checker = SupportChecker(wall)
         stride_optimizer = StrideOptimizer(wall, support_checker)
         brick_placer = BrickPlacer(wall, support_checker, stride_optimizer)
@@ -82,12 +83,6 @@ def main():
     # Main game loop
     running = True
     clock = pygame.time.Clock()
-    
-    # bond_names = {
-    #     STRETCHER_BOND: "Stretcher Bond",
-    #     ENGLISH_CROSS_BOND: "English Cross Bond",
-    #     WILD_BOND: "Wild Bond"
-    # }
 
     # Display initial starting position
     start_pos = wall.robot_position
@@ -109,10 +104,7 @@ def main():
                 elif event.key == pygame.K_s:
                     # Place all bricks in the stride
                     brick_placer.place_all_bricks_in_stride()
-                    
-                    # Calculate the next stride - don't call this here for 's' 
-                    # as it's already handled in place_all_bricks_in_stride
-                    
+                
                 elif event.key == pygame.K_1:
                     # Switch to Stretcher Bond
                     reset_wall(STRETCHER_BOND)
@@ -130,7 +122,7 @@ def main():
         pygame.display.flip()
         
         # Cap the frame rate
-        clock.tick(60)
+        clock.tick(FPS)
         
         # Check if wall is complete
         if wall.is_complete():

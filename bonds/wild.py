@@ -13,7 +13,6 @@ from constants import (
     FULL_BRICK_LENGTH, HEAD_JOINT, FULL_BRICK_WIDTH, 
     STRIDE_WIDTH, WALL_WIDTH, NUM_COURSES, HALF_BRICK_LENGTH
 )
-from optimizer.stride_optimizer import StrideOptimizer
 
 def _initialize_wild_bond_course(course, wall):
     """
@@ -350,8 +349,7 @@ def _would_create_falling_teeth(course, end_pos, wall, existing_patterns):
     # Return True if we would exceed 5 steps
     return count > 5
 
-
-def _get_optimal_starting_position(brick_positions, StrideOptimizer):
+def _get_optimal_starting_position(wall):
     """
     Determine the optimal starting position for a wild bond wall.
     
@@ -359,7 +357,7 @@ def _get_optimal_starting_position(brick_positions, StrideOptimizer):
     mix of headers and stretchers for the most efficient starting position.
     
     Args:
-        brick_positions (list): List of brick position data.
+        wall (Wall): The wall object to optimize for.
         
     Returns:
         tuple: (x, y) coordinates for the optimal starting position.
@@ -395,16 +393,16 @@ def _get_optimal_starting_position(brick_positions, StrideOptimizer):
             course_bricks = 0
             course_weight = 1.0 / (course + 1)  # Weight earlier courses more heavily
             
-            for position in range(len(brick_positions[course])):
-                if StrideOptimizer.brick_in_stride(course, position, stride_x, stride_y):
+            for position in range(len(wall.grid[course])):
+                if wall.brick_in_stride(course, position, stride_x, stride_y):
                     # Give more weight to areas with pattern transitions
                     # (where stretchers and headers meet)
-                    is_header = brick_positions[course][position][2] == 'header'
+                    is_header = wall.grid[course][position][2] == 'header'
                     
                     # Check if there's a pattern transition nearby
                     has_transition = False
                     if position > 0:
-                        prev_is_header = brick_positions[course][position-1][2] == 'header'
+                        prev_is_header = wall.grid[course][position-1][2] == 'header'
                         if prev_is_header != is_header:
                             has_transition = True
                     

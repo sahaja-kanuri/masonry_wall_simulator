@@ -36,28 +36,6 @@ class StrideOptimizer():
         """
         self.wall = wall
         self.support_checker = support_checker
-
-    def brick_in_stride(self, course, position, stride_x, stride_y):
-        """
-        Check if a brick is within the current stride bounds.
-        
-        Args:
-            course (int): The course number (0-based).
-            position (int): The position within the course.
-            stride_x (float): The x-coordinate of the stride's bottom-left corner.
-            stride_y (float): The y-coordinate of the stride's bottom-left corner.
-            
-        Returns:
-            bool: True if the brick is within the stride bounds, False otherwise.
-        """
-
-        brick = self.wall.brick_positions[course][position]
-        
-        # Check if the brick is within the stride bounds
-        return (brick['x'] >= stride_x and 
-                brick['x'] + brick['length'] <= stride_x + STRIDE_WIDTH and
-                brick['y'] >= stride_y and 
-                brick['y'] + brick['height'] <= stride_y + STRIDE_HEIGHT)
     
     def _start_new_stride(self):
         """
@@ -231,7 +209,7 @@ class StrideOptimizer():
                     continue
                 
                 # Check if brick is in stride
-                if self.brick_in_stride(course, position, stride_x, stride_y):
+                if self.wall.brick_in_stride(course, position, stride_x, stride_y):
                     brick = self.wall.brick_positions[course][position]
                     unbuilt_bricks.append({
                         'course': course,
