@@ -43,11 +43,11 @@ masonry_simulator/
 │   ├── visualization.py
 └── requirements.txt -->
 
-masonry_simulator/
+```
+masonry_wall_simulator/
 ├── constants.py
 ├── models/
 │   ├── __init__.py
-│   ├── brick.py
 │   └── wall.py
 ├── patterns/
 │   ├── __init__.py
@@ -62,8 +62,9 @@ masonry_simulator/
 └── ui/
     ├── __init__.py
     ├── visualization.py
-    └── event_handler.py
 main.py
+setup.py
+```
 
 ## Setup
 
